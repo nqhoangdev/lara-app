@@ -6,17 +6,18 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use App\Http\Requests;
 
 use App\Article;
 
+
+use App\Http\Requests\CreateArticle;
 
 class ArticlesController extends Controller
 {
     //
     
     public function index() {
-        $articles = Article::latest('published_at')->published()->get();
+        $articles = Article::latest('published_at')->get();
 //        return $articles;
 //        return  view('articles.index')->with('articles', $articles);
         return  view('articles.index', compact('articles'));
@@ -34,8 +35,8 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
     
-    public function store() {
-        $input = Request::all();
+    public function store(CreateArticle $request) {
+        $input = Request::all($request->all());
         
         Article::create($input);
         

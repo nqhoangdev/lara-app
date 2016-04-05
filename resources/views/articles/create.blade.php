@@ -38,5 +38,12 @@
    
 {!! Form::close() !!}
 
-
+@if ($errors->any())
+   <h1>Errors:</h1>
+    <ul class="alert alert-danger">
+        @foreach($errors as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
 @stop
